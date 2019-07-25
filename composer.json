@@ -1,0 +1,14 @@
+{
+    "name": "tail",
+    "authors": [
+        {
+            "name": "ale51"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "lib\\": "lib/"
+        }
+    }
+}
