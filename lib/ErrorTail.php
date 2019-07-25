@@ -10,7 +10,7 @@ class ErrorTail {
     private $filePath;
 
     /**
-     * Tail constructor.
+     * ErrorTail constructor.
      * @param string $filePath
      */
     public function __construct(string $filePath)
