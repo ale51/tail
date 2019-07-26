@@ -15,6 +15,6 @@ main.phpファイル内に```$tail = new ErrorTail("./test.log");```
 ## 実行
 ```$ php main.php```
 
-別のターミナルで```echo ERROR 1234567890 >> test.log``
+別のターミナルで```echo ERROR 1234567890 >> test.log```
 
 
