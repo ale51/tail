@@ -7,12 +7,12 @@ $filePath = "./test.log";
 $fp = fopen($filePath, 'r');
 
 // 一番末尾のポインタの位置を取得
-$position = $this->getLastPosition($fp);
+$position = getLastPosition($fp);
 
 do{
 
     // 一番末尾のポインタの位置を取得
-    $nextPosition = $this->getLastPosition($fp);
+    $nextPosition = getLastPosition($fp);
 
     // ポインタが増えている場合
     if($nextPosition > $position){
@@ -34,3 +34,9 @@ do{
     sleep($sleepInterval);
 
 }while(true);
+
+function getLastPosition($fp): int
+{
+    fseek($fp, 0, SEEK_END);
+    return ftell($fp);
+}
