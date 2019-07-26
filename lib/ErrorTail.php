@@ -18,16 +18,25 @@ class ErrorTail {
         $this->filePath = $filePath;
     }
 
-    public function run(){
+    public function run()
+    {
         $fp = fopen($this->filePath, 'r');
 
+        // 一番末尾のポインタの位置を取得
         $position = $this->getPosition($fp);
 
         do{
+
+            // 一番末尾のポインタの位置を取得
             $nextPosition = $this->getPosition($fp);
 
+            // ポインタが増えている場合
             if($nextPosition > $position){
+
+                // 現在のポインタをセット
                 fseek($fp, $position);
+
+                // 現在のポインタから増加分のデータを取得
                 $record = fread($fp, $nextPosition - $position);
 
                 if(preg_match("/^ERROR/", $record)) {
@@ -35,13 +44,19 @@ class ErrorTail {
                 }
             }
 
+            // ポインタの更新
             $position = $nextPosition;
+
             sleep(self::SLEEP_INTERVAL);
 
         }while(true);
 
     }
 
+    /**
+     * @param $fp
+     * @return int
+     */
     private function getPosition($fp): int
     {
         fseek($fp, 0, SEEK_END);
