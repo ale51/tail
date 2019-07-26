@@ -23,12 +23,12 @@ class ErrorTail {
         $fp = fopen($this->filePath, 'r');
 
         // 一番末尾のポインタの位置を取得
-        $position = $this->getPosition($fp);
+        $position = $this->getLastPosition($fp);
 
         do{
 
             // 一番末尾のポインタの位置を取得
-            $nextPosition = $this->getPosition($fp);
+            $nextPosition = $this->getLastPosition($fp);
 
             // ポインタが増えている場合
             if($nextPosition > $position){
@@ -57,7 +57,7 @@ class ErrorTail {
      * @param $fp
      * @return int
      */
-    private function getPosition($fp): int
+    private function getLastPosition($fp): int
     {
         fseek($fp, 0, SEEK_END);
         return ftell($fp);
