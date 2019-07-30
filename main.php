@@ -1,4 +1,19 @@
 <?php
+
+interface iNotifier
+{
+    public function notify($record);
+}
+
+class ConsoleNotifier implements iNotifier
+{
+    public function notify($record) {
+        if(preg_match("/^ERROR/", $record)) {
+            echo $record;
+        }
+    }
+}
+
 require_once "vendor/autoload.php";
 
 $sleepInterval = 1;
@@ -8,6 +23,8 @@ $fp = fopen($filePath, 'r');
 
 // 一番末尾のポインタの位置を取得
 $position = getLastPosition($fp);
+
+$notifier = new ConsoleNotifier;
 
 do{
 
@@ -23,9 +40,7 @@ do{
         // 現在のポインタから増加分のデータを取得
         $record = fread($fp, $nextPosition - $position);
 
-        if(preg_match("/^ERROR/", $record)) {
-            echo $record;
-        }
+        $notifier->notify($record);
     }
 
     // ポインタの更新
@@ -40,3 +55,4 @@ function getLastPosition($fp): int
     fseek($fp, 0, SEEK_END);
     return ftell($fp);
 }
+
