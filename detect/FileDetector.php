@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: s-ishikawa
- * Date: 2019-07-29
- * Time: 14:55
- */
+require_once 'Detector.php';
 
 class FileDetector implements Detector {
 
@@ -17,8 +12,11 @@ class FileDetector implements Detector {
 	}
 
 	/**
-	 * @param callable $condition 引数として監視しているファイルの１レコードが渡される。
-	 * @param int $sleepInterval
+	 * 保持しているファイル{@see FileDetector::file}の内容を監視する。
+	 * ファイルの内容が引数で渡された条件と合致した時に、保持する通知先{@see FileDetector::notifier}に対して通知を行う。
+	 * 
+	 * @param callable $condition 通知の条件。引数として監視しているファイルの１レコードが渡される。
+	 * @param int $sleepInterval 監視する間隔。単位は秒。
 	 */
 	public function monitor(callable $condition,int $sleepInterval) {
 		$position = $this->getLastPosition($this->file);

@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: s-ishikawa
- * Date: 2019-07-29
- * Time: 14:53
- */
+require_once 'Notifier.php';
 
 class MailNotifier implements Notifier{
 
